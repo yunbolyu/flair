@@ -33,4 +33,10 @@ jobs:
       - name: Run tests
         run: |
           python -c 'import flair'
-          pytest --runintegration -vv
+          pytest --runintegration -vv --cov=./flair --cov-report=xml
+
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v3      
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./coverage.xml
